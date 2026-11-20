@@ -25,8 +25,20 @@ function cargarClima() {
         .then(data => {
             document.getElementById('ciudad').innerHTML = data.name;
             document.getElementById('contenido').innerHTML = Math.round(data.main.temp);
-            const icono = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-            document.getElementById('imagen').setAttribute('src', icono);
+           // const icono = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+           // document.getElementById('imagen').setAttribute('src', icono);
+           const iconos = {
+    '01d': '☀️', '01n': '🌙',
+    '02d': '⛅', '02n': '⛅',
+    '03d': '☁️', '03n': '☁️',
+    '04d': '☁️', '04n': '☁️',
+    '09d': '🌧️', '09n': '🌧️',
+    '10d': '🌦️', '10n': '🌧️',
+    '11d': '⛈️', '11n': '⛈️',
+    '13d': '❄️', '13n': '❄️',
+    '50d': '🌫️', '50n': '🌫️'
+};
+document.getElementById('imagen').outerHTML = `<span style="font-size:36px">${iconos[data.weather[0].icon] || '🌡️'}</span>`;
         })
         .catch(error => {
             console.error("Error clima:", error);
